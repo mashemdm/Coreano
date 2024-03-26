@@ -4,14 +4,12 @@ import numpy as np
 import pytesseract
 from PIL import Image
 
-st.title("Reconocimiento óptico de Caracteres")
+st.title("Cómo se pronuncia en coreano")
 
 
 # img_file_buffer = st.camera_input("Toma una Foto")
-uploaded_file = st.file_uploader("Sube una imagen", type=["jpg", "jpeg", "png"])
+uploaded_file = st.file_uploader("Sube tu imagen en español para traducirla", type=["jpg", "jpeg", "png"])
 
-with st.sidebar:
-      filtro = st.radio("Aplicar Filtro",('Con Filtro', 'Sin Filtro'))
 
 
 if uploaded_file is not None:
@@ -21,8 +19,7 @@ if uploaded_file is not None:
     cv2_img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
       
-    if filtro == 'Con Filtro':
-         cv2_img=cv2.bitwise_not(cv2_img)
+
         
     img_rgb = cv2.cvtColor(cv2_img, cv2.COLOR_BGR2RGB)
     text=pytesseract.image_to_string(img_rgb)
