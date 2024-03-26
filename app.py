@@ -17,16 +17,14 @@ uploaded_file = st.file_uploader("Sube tu imagen en español para traducirla", t
 
 
 if uploaded_file is not None:
-    # To read image file buffer with OpenCV:
     img_bytes = uploaded_file.read()
     nparr = np.frombuffer(img_bytes, np.uint8)
     cv2_img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-        
     img_rgb = cv2.cvtColor(cv2_img, cv2.COLOR_BGR2RGB)
-    text=pytesseract.image_to_string(img_rgb)
+    text = pytesseract.image_to_string(img_rgb)
     st.write(text) 
     
-      if st.button("Generar Audio en Coreano"):
+    if st.button("Generar Audio en Coreano"):
         result, output_text = text_to_speech(text)
         audio_file_path = f"temp/{result}.mp3"
         audio_file = open(audio_file_path, "rb")
@@ -36,6 +34,7 @@ if uploaded_file is not None:
 
         st.markdown(f"## Texto traducido al coreano:")
         st.write(output_text)
+
 
 def text_to_speech(text):
     translator = Translator()
