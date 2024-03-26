@@ -5,6 +5,8 @@ import pytesseract
 from PIL import Image
 
 import os
+from gtts import gTTS
+from googletrans import Translator
 
 st.title("Cómo se pronuncia en coreano")
 
