@@ -41,14 +41,6 @@ def text_to_speech(text):
         my_file_name = "audio"
     tts.save(f"temp/{my_file_name}.mp3")
     return my_file_name, trans_text
-
-if uploaded_file is not None:
-    img_bytes = uploaded_file.read()
-    nparr = np.frombuffer(img_bytes, np.uint8)
-    cv2_img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-    img_rgb = cv2.cvtColor(cv2_img, cv2.COLOR_BGR2RGB)
-    text = pytesseract.image_to_string(img_rgb)
-    st.write(text) 
     
     if st.button("Generar Audio en Coreano"):
         result, output_text = text_to_speech(text)
