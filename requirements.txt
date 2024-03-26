@@ -4,3 +4,4 @@ numpy
 opencv-python-headless
 pytesseract
 Pillow
+gTTS==2.2.2
