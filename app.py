@@ -17,6 +17,11 @@ def text_to_speech(text):
         my_file_name = text[0:20]
     except:
         my_file_name = "audio"
+
+    # Verificar si el directorio 'temp' existe, si no, crearlo
+    if not os.path.exists("temp"):
+        os.makedirs("temp")
+
     tts.save(f"temp/{my_file_name}.mp3")
     return my_file_name, trans_text
 
