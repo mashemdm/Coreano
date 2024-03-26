@@ -3,18 +3,26 @@ import cv2
 import numpy as np
 import pytesseract
 from PIL import Image
-
 import os
 from gtts import gTTS
 from googletrans import Translator
 
+def text_to_speech(text):
+    translator = Translator()
+    translation = translator.translate(text, dest='ko')  # Traducir al coreano
+    trans_text = translation.text
+
+    tts = gTTS(trans_text, lang='ko', slow=False)  # Generar audio en coreano
+    try:
+        my_file_name = text[0:20]
+    except:
+        my_file_name = "audio"
+    tts.save(f"temp/{my_file_name}.mp3")
+    return my_file_name, trans_text
+
 st.title("Cómo se pronuncia en coreano")
 
-
-# img_file_buffer = st.camera_input("Toma una Foto")
 uploaded_file = st.file_uploader("Sube tu imagen en español para traducirla", type=["jpg", "jpeg", "png"])
-
-
 
 if uploaded_file is not None:
     img_bytes = uploaded_file.read()
@@ -34,20 +42,3 @@ if uploaded_file is not None:
 
         st.markdown(f"## Texto traducido al coreano:")
         st.write(output_text)
-
-
-def text_to_speech(text):
-    translator = Translator()
-    translation = translator.translate(text, dest='ko')  # Traducir al coreano
-    trans_text = translation.text
-
-    tts = gTTS(trans_text, lang='ko', slow=False)  # Generar audio en coreano
-    try:
-        my_file_name = text[0:20]
-    except:
-        my_file_name = "audio"
-    tts.save(f"temp/{my_file_name}.mp3")
-    return my_file_name, trans_text
-    
-  
-    
