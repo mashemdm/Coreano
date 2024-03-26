@@ -4,6 +4,8 @@ import numpy as np
 import pytesseract
 from PIL import Image
 
+import os
+
 st.title("Cómo se pronuncia en coreano")
 
 
@@ -24,4 +26,19 @@ if uploaded_file is not None:
     img_rgb = cv2.cvtColor(cv2_img, cv2.COLOR_BGR2RGB)
     text=pytesseract.image_to_string(img_rgb)
     st.write(text) 
+
+def text_to_speech(text):
+    translator = Translator()
+    translation = translator.translate(text, dest='ko')  # Traducir al coreano
+    trans_text = translation.text
+
+    # Es posible que necesites procesar el texto coreano aquí para que se muestre correctamente en letras coreanas
+
+    tts = gTTS(trans_text, lang='ko', slow=False)  # Generar audio en coreano
+    try:
+        my_file_name = text[0:20]
+    except:
+        my_file_name = "audio"
+    tts.save(f"temp/{my_file_name}.mp3")
+    return my_file_name, trans_text
     
