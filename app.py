@@ -7,14 +7,12 @@ import os
 from gtts import gTTS
 from googletrans import Translator
 
-def translate_to_korean(text):
-    translator = Translator()
-    translation = translator.translate(text, dest='ko')  # Traducir al coreano
-    return translation.text
-
 def text_to_speech(text):
-    korean_text = translate_to_korean(text)
-    tts = gTTS(korean_text, lang='ko', slow=False)  # Generar audio en coreano
+    translator = Translator()
+    translation = translator.translate(text, src = "es" , dest='ko')  # Traducir al coreano
+    trans_text = translation.text
+
+    tts = gTTS(trans_text, lang='ko', slow=False)  # Generar audio en coreano
     try:
         my_file_name = text[0:20]
     except:
@@ -25,11 +23,11 @@ def text_to_speech(text):
         os.makedirs("temp")
 
     tts.save(f"temp/{my_file_name}.mp3")
-    return my_file_name, korean_text
+    return my_file_name, trans_text
 
 st.title("Cómo se pronuncia en coreano")
 
-uploaded_file = st.file_uploader("Sube tu imagen en español para traducirla", type=["jpg", "jpeg", "png"])
+uploaded_file = st.file_uploader("Sube tu imagen en inglés para traducirla", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
     img_bytes = uploaded_file.read()
