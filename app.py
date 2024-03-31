@@ -27,7 +27,7 @@ def text_to_speech(text):
 
 st.title("Cómo se pronuncia en coreano")
 
-uploaded_file = st.file_uploader("Sube tu imagen en inglés para traducirla", type=["jpg", "jpeg", "png"])
+uploaded_file = st.file_uploader("Sube tu imagen en español para traducirla", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
     img_bytes = uploaded_file.read()
